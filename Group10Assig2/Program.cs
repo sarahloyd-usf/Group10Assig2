@@ -31,16 +31,18 @@ namespace Assignment2_Fall2020
             Console.WriteLine("Question 4");
             int[] array3 = new int[] { -4, -1, 0, 3, 10 };
             int[] result2 = SortedSquares(array3);
-
             //Write code to print the result array here:
-
-
+            //int i;
+            //for (i=0;i<array3.Length;i++)
+            //{
+              //Console.Write(array3[i]+",");
+            //}
+            //Console.Write("\n");
 
             Console.WriteLine("Question 5");
             int[] nums1 = { 4, 2, 2, 4 };
             int[] nums2 = { 2, 2 };
             int[] intersect1 = Intersect(nums1, nums2);
-
             //Write code to print the result array here:
             Console.WriteLine("[{0}]", string.Join(", ", intersect1));
 
@@ -55,7 +57,7 @@ namespace Assignment2_Fall2020
             int lower = 0;
             int upper = 99;
             List<String> ResultList = Ranges(numbers, lower, upper);
-
+            //Write code to print the result array here:
             Console.Write("[");
             bool firstRun = true;
             for (int i = 0; i < ResultList.Count(); i++)
@@ -71,10 +73,11 @@ namespace Assignment2_Fall2020
             }
             Console.WriteLine("]");
 
+
             Console.WriteLine("Question 8");
             string[] names = new string[] { "pes", "fifa", "gta", "pes(2019)" };
             string[] namesResult = UniqFolderNames(names);
-
+            //Write code to print the result array here:
             Console.Write("[");
             firstRun = true;
             for (int i = 0; i < namesResult.Length; i++)
@@ -90,96 +93,174 @@ namespace Assignment2_Fall2020
                 Console.Write("\"" + namesResult[i] + "\"");
             }
             Console.WriteLine("]");
-
-
         }
 
+        //QUESTION 1
         public static void PrintPatternAnyComplexity(int n)
+
         {
             try
             {
+                int i, j;
+                //We will first declare the integers I and J since we are going to use them later in our for loop
+                Console.WriteLine("How many rows do you need in your pyramid?:");
+                n = Convert.ToInt32(Console.ReadLine());
+                //Now getting the input from the user
+                for (i = 1; i <= n; i++)
+                //The way that I have decided to build this pyramid is through matrix notation. I here will represent the row
+                //whereas J will represent the column. So this loop is designed in a way that it will first deal with the
+                //rows and then with the columns.
+                {
+                    for (j = 1; j <= i; j++)
+                    //2n-1 is used here because that is the odd number progression. In the 2nd row we need 3 stars for example.
+                    //once J increases more than 2n-1, the loop returns to the previous line. 
+                    //{
+                    //if (j >= n - (i - 1) && j <= n + (i - 1))
+                    //    //This line is important for the pyramid to be center aligned.
+                    {
+                        Console.Write("*");
 
-                //Write your code here; Q1
-
+                    }
+                    Console.Write("\n");//When the program is done printing the stars in a row, it is instructed 
+                                        //to start printing from the new line.
+                }
             }
-
             catch (Exception)
             {
 
                 throw;
-
             }
-        }
 
+        }
         public static void PrintPatternLinearComplexity(int n)
+
         {
             try
             {
-
-                //Write your code here; Q1
-
+                int i;
+                Console.WriteLine("How many rows do you need in your pyramid?:");//asking the user for number of rows
+                n = Convert.ToInt32(Console.ReadLine());//conerting it to int
+                String s = "";//starting value for string
+                for (i = 1; i <= n; i++)
+                {
+                    s += "*";//every line, we add an additional star to print
+                    Console.WriteLine(s);
+                }
             }
-
             catch (Exception)
             {
 
                 throw;
-
             }
+
         }
 
+        //QUESTION 2
         public static int LongestSubSeq(int[] nums)
         {
             try
             {
+                // 'max' to store the length of longest increasing subarray
+                // 'len' to store the lengths of longest increasing subarray at diiferent instants of time 
+                int max = 1, len = 1;
+                int n = nums.Length;
+                // traverse the array from the 2nd element
+                for (int i = 1; i < n; i++)
+                {
 
-                //write your code here Q2
+                    // if current element if greater than previous element, then this element
+                    // helps in building up the previous increasing subarray encountered so far 
+                    if (nums[i] > nums[i - 1])
+                        len++;
+                    else
+                    {
+                        // check if 'max' length is less than the length of the current increasing subarray. If true, than update 'max'
+                        if (max < len)
+                            max = len;
 
+                        // reset 'len' to 1 as from this
+                        // element again the length of the
+                        // new increasing subarray is being
+                        // calculated
+                        len = 1;
+                    }
+                }
+
+                // comparing the length of the last
+                // increasing subarray with 'max'
+                if (max < len)
+                    max = len;
+
+                // required maximum length
+                return max;
+                Console.Write("\n");
             }
-
             catch (Exception)
             {
 
                 throw;
-
             }
-
             return 0;
         }
 
+        //QUESTION 3
         public static void PrintTwoParts(int[] array2)
         {
             try
             {
+                {
+                    int n;
+                    n = array2.Length;
+                    int splitPoint = findSplitPoint(array2);
 
-                //Write your code here; Q3
+                    if (splitPoint == -1 || splitPoint == n)
+                    {
+                        Console.Write("Not Possible");
+                        return;
+                    }
 
+                    for (int i = 0; i < n; i++)
+                    {
+                        if (splitPoint == i)
+                            Console.WriteLine();
+
+                        Console.Write(array2[i] + " ");
+                    }
+                    Console.WriteLine("\n");
+                }
             }
-
             catch (Exception)
             {
 
                 throw;
-
             }
+
         }
 
+        //QUESTION 4
         public static int[] SortedSquares(int[] A)
         {
             try
             {
-
-                //Write Your Code Here; Q4
-
+                int i, len;
+                int[] B;
+                len = A.Length;
+                for (i = 0; i < len; i++)
+                {
+                    A[i] = A[i] * A[i];//finding the square value of each element
+                }
+                Array.Sort(A);//now sorting that array
+                for (i = 0; i < len; i++)
+                {
+                    Console.Write(A[i] + " ");//writing every element
+                }
+                Console.Write("\n");
             }
-
             catch (Exception)
             {
 
                 throw;
-
             }
-
             return null;
         }
 
@@ -379,6 +460,37 @@ namespace Assignment2_Fall2020
             }
 
             return default;
+        }
+
+        //ADDITIONAL Q3 CONTENT
+        static int findSplitPoint(int[] arr)
+        {
+            int n;
+            n = arr.Length;
+            int leftSum = 0;
+
+            // traverse array element
+            for (int i = 0; i < n; i++)
+            {
+
+                // add current element to left Sum
+                leftSum += arr[i];
+
+                // find sum of rest array
+                // elements (rightSum)
+                int rightSum = 0;
+
+                for (int j = i + 1; j < n; j++)
+                    rightSum += arr[j];
+
+                // split point index
+                if (leftSum == rightSum)
+                    return i + 1;
+            }
+
+            // if it is not possible to 
+            // split array into two parts
+            return -1;
         }
     }
 }
