@@ -37,7 +37,6 @@ namespace Assignment2_Fall2020
             //{
               //Console.Write(array3[i]+",");
             //}
-            //Console.Write("\n");
 
             Console.WriteLine("Question 5");
             int[] nums1 = { 4, 2, 2, 4 };
@@ -114,9 +113,6 @@ namespace Assignment2_Fall2020
                     for (j = 1; j <= i; j++)
                     //2n-1 is used here because that is the odd number progression. In the 2nd row we need 3 stars for example.
                     //once J increases more than 2n-1, the loop returns to the previous line. 
-                    //{
-                    //if (j >= n - (i - 1) && j <= n + (i - 1))
-                    //    //This line is important for the pyramid to be center aligned.
                     {
                         Console.Write("*");
 
